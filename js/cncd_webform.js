@@ -1,7 +1,7 @@
 jQuery(document).ready(
     function() {
       // check if we have a select which name ends with province-id, and add hook
-      jQuery("select[id$='province-id']").on('change',
+      jQuery("select[id$='province-id']").change(
           function() {
             // get the name of the selected province
             var selectID = this.id;
@@ -17,7 +17,7 @@ jQuery(document).ready(
                 labelContent = "- - - Brabant Wallon ";
                 break;
               case "Brussels":
-                labelContent = "";
+                labelContent = "- - - Bruxelles ";
                 break;
               case "Hainaut":
                 labelContent = "- - - Hainaut ";
