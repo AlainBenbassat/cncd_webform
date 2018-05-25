@@ -18,7 +18,7 @@ function cncd_webform_preprocess_page(&$vars, $hook) {
   if (isset($vars['node']) && property_exists($vars['node'], 'webform')) {
     // add the javascript file
     $url = $base_url . strchr(__DIR__, '/sites') . '/js/cncd_webform.js';
-    drupal_add_js($url);
+    drupal_add_js($url, ['type' => 'file', 'scope' => 'footer']);
   }
 }
 
