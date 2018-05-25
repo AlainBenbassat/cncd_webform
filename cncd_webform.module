@@ -1,0 +1,50 @@
+<?php
+
+function cncd_webform_webform_select_options_info() {
+  $items = [];
+
+  $items['civicrm-organizations'] = array(
+    'title' => t('CiviCRM Organizations'),
+    'options callback' => '_cncd_webform_getOrganizations',
+  );
+
+  return $items;
+}
+
+function cncd_webform_preprocess_page(&$vars, $hook) {
+  global $base_url;
+
+  // check if we are on a webform
+  if (isset($vars['node']) && property_exists($vars['node'], 'webform')) {
+    // add the javascript file
+    $url = $base_url . strchr(__DIR__, '/sites') . '/js/cncd_webform.js';
+    drupal_add_js($url);
+  }
+}
+
+function _cncd_webform_getOrganizations() {
+  $organizationList = [];
+
+  civicrm_initialize();
+
+  $sql = "
+    select
+      c.id,
+      c.organization_name
+    from
+      civicrm_contact c
+    where 
+      c.contact_type = 'Organization'
+    order by 
+      c.sort_name
+    limit 0,200";
+
+  $dao = CRM_Core_DAO::executeQuery($sql);
+
+  while ($dao->fetch()) {
+    $organizationList[$dao->id] = $dao->organization_name;
+  }
+
+  return $organizationList;
+}
+
