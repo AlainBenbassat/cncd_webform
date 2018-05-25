@@ -3,20 +3,47 @@ function cncd_webform_provinceSelect() {
   var selectID = this.id;
   var selectedProvince = jQuery('#' + selectID + ' option:selected').text();
 
-  if (selectedProvince) {
-    // find the label that ends with this name
-    var regex = new RegExp(selectedProvince + "$");
-    var labelOfCheckbox = jQuery('label').filter(
-        function() {
-          return regex.test($(this).text());
-        }
-    );
+  // find the matching tag label
+  var labelContent = "";
+  switch (selectedProvince) {
+    case "Antwerpen":
+      labelContent = "- - - Flandre ";
+      break;
+    case "Brabant Wallon":
+      labelContent = "- - - Brabant Wallon ";
+      break;
+    case "Brussels":
+      labelContent = "";
+      break;
+    case "Hainaut":
+      labelContent = "";
+      break;
+    case "Liege":
+      labelContent = "";
+      break;
+    case "Limburg":
+      labelContent = "";
+      break;
+    case "Luxembourg":
+      labelContent = "";
+      break;
+    case "Namur":
+      labelContent = "";
+      break;
+    case "Oost-Vlaanderen":
+      labelContent = "";
+      break;
+    case "West-Vlaanderen":
+      labelContent = "";
+      break;
+    case "Vlaams-Brabant":
+      labelContent = "";
+  }
 
-    if (labelOfCheckbox) {
-      // find the checkbox via the "for" attribute
-      var checkboxID = jQuery(labelOfCheckbox).attr('for');
-      jQuery('#') + checkboxID).prop("checked");
-    }
+  // find the label contains the text
+  var checkboxID = jQuery("label:contains('" + labelContent + "'").attr('for');
+  if (checkboxID) {
+    jQuery('#' + checkboxID).prop("checked");
   }
 }
 
