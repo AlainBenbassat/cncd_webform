@@ -54,7 +54,7 @@ jQuery(document).ready(
                 labelContent = "- - - Flandre ";
                 break;
               case "Vlaams-Brabant":
-              case "Brabant flamend":
+              case "Brabant flamand":
                 labelContent = "- - - Flandre ";
                 break;
             }
